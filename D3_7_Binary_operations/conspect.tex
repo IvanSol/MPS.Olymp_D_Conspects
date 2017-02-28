@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+%\bibliographystyle{unsrt}
+\bibliographystyle{gost780u}
+\usepackage{cite}
+\usepackage[nottoc]{tocbibind}
+\usepackage{a4wide}
+%\usepackage[utf8]{inputenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[T2A]{fontenc}
+\usefont{T2A}{qcr}{m}{n}
+\usepackage{graphics,graphicx}
+\usepackage{subfig}
+\usepackage{amssymb,amsfonts,amsthm,amsmath,mathtext,cite,enumerate,float}
+\usepackage[english,russian]{babel}
+%\input{ix-utf8enc.dfu}
+\usepackage{tikz}
+\usepackage{slashbox}
+\usepackage{epsfig}
+\usepackage{subfig}
+\usepackage{multicol}
+\usepackage{epstopdf} 
+\usepackage{hyperref}
+\newcommand*{\vect}[1]{\overrightarrow{#1}}
+\newcommand*{\egref}[1]{(\ref{#1})}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,max}
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\A{\mathbb{A}}
+\def\B{\mathbb{B}}
+\def\Z{\mathbb{Z}}
+\graphicspath{ {eps/} }
+
+\newtheorem{Def}{Определение}
+\newtheorem{Definition}[Def]{Определение}
+\setcounter{Def}{0}%
+
+\textheight=24cm  % высота текста
+\textwidth=16cm % ширина текста
+\oddsidemargin=0pt % отступ от левого края
+\topmargin=-1.5cm % отступ от верхнего края
+\parindent=24pt % абзацный отступ
+\parskip=0pt % интервал между абзацами
+\tolerance=2000 % "терпимость" к жидким строкам
+\flushbottom % выравнивание высоты страниц
+%\graphicspath{{data/}}
+%\graphicspath{{data/further_research/final_pic/}}
+\renewcommand{\baselinestretch}{1.3}
+\fontsize{13}{15.6}\selectfont
+
+%\bibliographystyle{unsrt}
+\linespread{1.5}
+
+%%Листинг:
+\usepackage{xcolor}
+\usepackage{color} %% это для отображения цвета в коде
+\usepackage{listings} %% собственно, это и есть пакет listings
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}} %% это сделает текст заголовка белым
+%% код ниже нарисует серую рамочку вокруг заголовка кода.
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+\newcommand{\booleantable}[4]{\begin{tabular}[|c|c c|]
+ & 0 & 1 \\
+ \hline
+0 & #1 & #2 \\
+1 & #3 & #4 \\
+\hline
+\end{tabular}}
+
+
+
+\begin{document}
+%Листинг:
+\lstset{ %
+language=C++,                 % выбор языка для подсветки (здесь это С++)
+basicstyle=\small\sffamily, % размер и начертание шрифта для подсветки кода
+numbers=left,               % где поставить нумерацию строк (слева\справа)
+numberstyle=\small,           % размер шрифта для номеров строк
+stepnumber=1,                   % размер шага между двумя номерами строк
+numbersep=10pt,                % как далеко отстоят номера строк от подсвечиваемого кода
+backgroundcolor=\color{white}, % цвет фона подсветки - используем \usepackage{color}
+showspaces=false,            % показывать или нет пробелы специальными отступами
+showstringspaces=false,      % показывать или нет пробелы в строках
+showtabs=false,             % показывать или нет табуляцию в строках
+frame=single,              % рисовать рамку вокруг кода
+tabsize=2,                 % размер табуляции по умолчанию равен 2 пробелам
+captionpos=t,              % позиция заголовка вверху [t] или внизу [b] 
+breaklines=true,           % автоматически переносить строки (да\нет)
+breakatwhitespace=false, % переносить строки только если есть пробел
+escapeinside={\%*}{*)},   % если нужно добавить комментарии в коде
+basicstyle=\small\ttfamily,
+keywordstyle=\bfseries\color{green!40!black},
+commentstyle=\itshape\color{purple!40!black},
+identifierstyle=\color{blue},
+stringstyle=\color{orange},
+}
+\renewcommand{\lstlistingname}{Решение}
+
+\begin{center}
+\begin{Large}
+22.01.17. Группа D3. Занятие 7. \\ Бинарные операции.\\
+\end{Large}
+Подготовил \href{https://vk.com/ivansol42}{Соломатин Иван Андреевич}. \\
+ivan.solomatin@phystech.edu; solomatin@informatics.ru
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Логические операции}
+С уроков дискретной математики вам должны быть известны следующие булевы функции:
+\booleantable{0}{0}{0}{0}
+%\begin{tabular}{|c|c|c|c|}
+
+%\end{tabular}
+
+\end{document}
