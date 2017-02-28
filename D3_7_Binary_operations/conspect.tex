@@ -34,6 +34,7 @@
 \newtheorem{Def}{Определение}
 \newtheorem{Definition}[Def]{Определение}
 \setcounter{Def}{0}%
+\usepackage{tabularx}
 
 \textheight=24cm  % высота текста
 \textwidth=16cm % ширина текста
@@ -61,12 +62,17 @@
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
 \captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
 
-\newcommand{\booleantable}[4]{\begin{tabular}[|c|c c|]
- & 0 & 1 \\
- \hline
-0 & #1 & #2 \\
-1 & #3 & #4 \\
+\newcommand{\booleantable}[5]{\begin{tabular}{c|c c}
+#1 & 0 & 1 \\
 \hline
+0 & #2 & #3 \\
+1 & #4 & #5 \\
+\end{tabular}}
+
+\newcommand{\booleantableunar}[3]{\begin{tabular}{c|c c}
+#1 & 0 & 1 \\
+\hline
+  & #2 & #3 \\
 \end{tabular}}
 
 
@@ -74,7 +80,7 @@
 \begin{document}
 %Листинг:
 \lstset{ %
-language=C++,                 % выбор языка для подсветки (здесь это С++)
+language=Pascal,                 % выбор языка для подсветки (здесь это С++)
 basicstyle=\small\sffamily, % размер и начертание шрифта для подсветки кода
 numbers=left,               % где поставить нумерацию строк (слева\справа)
 numberstyle=\small,           % размер шрифта для номеров строк
@@ -106,11 +112,109 @@ stringstyle=\color{orange},
 ivan.solomatin@phystech.edu; solomatin@informatics.ru
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Логические операции}
-С уроков дискретной математики вам должны быть известны следующие булевы функции:
-\booleantable{0}{0}{0}{0}
+\section{Побитовые логические операции}
+С уроков дискретной математики вам должны быть известны булевы функции, приведённые на таблице \ref{tab:bool}. У этих булевых функций в большинстве языков программирования есть соответствующие бинарные операции, которые так же приведены на таблице \ref{tab:bool}.
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|c|c|c|}
+\hline
+Название функции & Pascal & C++ & Таблица истинности \\
+\hline
+И (Дизъюнкция) & and & \& & \booleantable\&0001 \\
+\hline
+ИЛИ (Коньюнкция) & or & | & \booleantable|0111 \\
+\hline
+Не (Отрицание) & not & $\sim$ & \booleantableunar!10 \\
+\hline
+Исключающее или (Xor) & xor & \Huge{\^{}} & \booleantable{\^{}}0110 \\
+\hline
+\end{tabularx}
+\caption{Булевы функции}
+\label{tab:bool}
+\end{table}
 %\begin{tabular}{|c|c|c|c|}
 
+В дискретной математике эти операции применяются только булевым значениям, однако в языках программирования их можно применять и к целым числам. Например,
+\begin{equation}
+\label{example}
+\text{Pascal}: \;\;\;\; 14 \; \textbf{and} \; 5 = 4
+\end{equation}
+Почему так происходит? Всё очень просто. Как известно, целые числа хранятся в памяти компьютера в двоичном коде. Вышеописанные булевы функции просто применяются к каждому биту двух чисел и результат записывается в соответствующий бит результата. То есть, в примере \ref{example} происходит следующее:
+\begin{equation}
+\begin{aligned}
+14 \; &=& 1110_2 \\
+5  \; &=& 0101_2  \\
+14 \; \textbf{and} \; 5 = 4 \; &=& 0100_2
+\end{aligned}
+\end{equation}
 %\end{tabular}
+Логическое И, применённое к каждому биту даёт единицу только на третьем бите, т.к. они равны 1 у обоих чисел.\\
+
+\textbf{Упражнение.} Чему равны: 
+\begin{itemize}
+\item $14 \; \textbf{or} \; 5,$
+\item $14 \; \textbf{and} \; \textbf{not} \; 5,$
+\item $16 \; \textbf{or} \; 15$ ?
+\end{itemize}
+\section{Битовый сдвиг}
+Есть ещё два важных битовых оператора. Битовый сдвиг влево и битовый сдвиг вправо. Этим операторы не строятся на основе булевых функций над битами, а просто сдвигают биты числа вправо или влево, заполняя лишние биты нулями.
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|c|c|}
+\hline
+Название функции & Pascal & C++ \\
+\hline
+Бинарный сдвиг x влево на k & x \textbf{shl} k & x $<<$ k \\
+\hline
+Бинарный сдвиг x вправо на k & x \textbf{shr} k & x $>>$ k \\
+\hline
+\end{tabularx}
+\caption{Операторы сдвига}
+\label{tab:shift}
+\end{table}
+Стоит заметить, что оператор сдвига не изменяет саму переменную к которой применяется, а возвращает результат как обычная функция. Т.е. такой код:
+\begin{lstlisting}[label=some-code]
+var
+	x, y: integer;
+begin
+	x := 1;
+	x shl 2;
+	y := x shl 2;
+	writeln(x, ' ', y);
+end.
+\end{lstlisting}
+Выведет на экран <<1 4>>, так как в 5 строке значение вычисляется, но никуда не сохраняется, и вообще говоря, строка 5 не имеет смысла.
+
+Если вспомнить как записывается число в двоичном коде, то для оператора сдвига можно получить математическое выражение.
+Если в двоичном коде число имеет вид:
+\begin{equation}
+x = a_na_{n-1}\cdots a_1a_0,
+\end{equation}
+где $a_n, \cdots, a_0$ - цифры (0 либо 1), то тогда:
+\begin{equation}
+x = a_n * 2^n + a_{n-1} * 2^{n-1} + \cdots + a_1 * 2 + a_0.
+\end{equation}
+Посмотрим, что произойдёт при сдвиге влево на $k$ битов, если первые k битов были равны 0:
+$$
+x = \underbrace{00\cdots00}_{k}a_{n-k}a_{n-k-1}\cdots a_1a_0
+$$
+\begin{equation}
+x = a_{n-k} * 2^{n-k} + a_{n-k-1} * 2^{n-k-1} + \cdots + a_1 * 2 + a_0
+\end{equation}
+$$
+x \; \textbf{shl} \; k = a_{n-k}a_{n-k-1}\cdots a_1a_0\underbrace{00\cdots00}_{k} \\
+$$
+$$
+x \; \textbf{shl} \; k = a_{n-k} * 2^{n} + a_{n-k-1} * 2^{n-1} + \cdots + a_{1} * 2^{k+1} + a_0 * 2^k.
+$$
+Заметим, что
+\begin{equation}
+x \; \textbf{shl} \; k = x * 2^k.
+\end{equation}
+Таким образом, если при умножении числа $x$ на $2^k$, число не переполнится (значение вмещается в тип), то это умножение можно выполнить с помощью бинарного сдвига влево на $k$ бит.
+Для сдвига вправно аналогично можно получить формулу:
+\begin{equation}
+x \; \textbf{shr} \; k = x \; \textbf{div} \; 2^k.
+\end{equation}
 
 \end{document}
