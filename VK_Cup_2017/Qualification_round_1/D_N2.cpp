@@ -27,7 +27,6 @@ int count_bit(int x)
 
 int main()
 {
-	memset(cnt, 0x00, sizeof(AMAX));
 	cin >> N >> K;
 	a.resize(N);
 
@@ -38,7 +37,7 @@ int main()
 	
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < i; j++)
-			if (count_bit(a[i], a[j]) == K)
+			if (count_bit(a[i] ^ a[j]) == K)
 				res++;
 	
 	cout << res;
