@@ -1,6 +1,6 @@
 //Problem: VKcup2017 Qualification round 1. Problem D.
 //Authors of the solution:
-//Volodin Sergey 
+//Volodin Sergey <sergei.volodin@phystech.edu>
 //Solomatin Ivan <ivan.solomatin@phystech.edu>.
 
 //The computational complexity is O(N^2). Does not fit the TL.
@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <vector>
-
 using namespace std;
 
 int N, K;

@@ -1,12 +1,11 @@
 //Problem: VKcup2017 Qualification round 1. Problem D.
 //Authors of the solution:
-//Volodin Sergey 
+//Volodin Sergey <sergei.volodin@phystech.edu>
 //Solomatin Ivan <ivan.solomatin@phystech.edu>.
 
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
-
 using namespace std;
 
 #define AMAX 10050
@@ -27,7 +26,7 @@ int count_bit(int x)
 
 int main()
 {
-	memset(cnt, 0x00, sizeof(AMAX));
+	memset(cnt, 0, sizeof(cnt));
 
 	cin >> N >> K;
 
@@ -47,7 +46,7 @@ int main()
 	{
 		for (int ai = 0; ai <= a_max; ai++)
 			if (cnt[ai] > 0)
-				res += (cnt[ai] * (cnt[ai] - 1)) / 2;
+				res += (cnt[ai] * (cnt[ai] - 1));
 	}
 	else
 	{
@@ -61,9 +60,8 @@ int main()
 						if (aj != ai && aj <= a_max && cnt[aj] > 0)
 							res += cnt[ai] * cnt[aj];
 					}
-		res /= 2;
 	}
 
-	cout << res << endl;
+	cout << res / 2 << endl;
 	return 0;
 }

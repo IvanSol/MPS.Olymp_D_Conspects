@@ -1,6 +1,6 @@
 //Problem: VKcup2017 Qualification round 1. Problem C.
 //Authors of the solution:
-//Volodin Sergey 
+//Volodin Sergey <sergei.volodin@phystech.edu>
 //Solomatin Ivan <ivan.solomatin@phystech.edu>.
 
 #include <iostream>

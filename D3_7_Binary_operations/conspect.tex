@@ -199,12 +199,14 @@ x = a_n * 2^n + a_{n-1} * 2^{n-1} + \cdots + a_1 * 2 + a_0.
 x = \underbrace{00\cdots00}_{k}a_{n-k}a_{n-k-1}\cdots a_1a_0
 \end{equation}
 \begin{equation}
+\label{x_before}
 x = a_{n-k} * 2^{n-k} + a_{n-k-1} * 2^{n-k-1} + \cdots + a_1 * 2 + a_0
 \end{equation}
 \begin{equation}
 x \; \textbf{shl} \; k = a_{n-k}a_{n-k-1}\cdots a_1a_0\underbrace{00\cdots00}_{k} \\
 \end{equation}
 \begin{equation}
+\label{x_after}
 x \; \textbf{shl} \; k = a_{n-k} * 2^{n} + a_{n-k-1} * 2^{n-1} + \cdots + a_{1} * 2^{k+1} + a_0 * 2^k.
 \end{equation}
 Заметим, что
